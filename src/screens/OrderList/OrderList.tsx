@@ -3,7 +3,10 @@ import { View, Text, ScrollView, RefreshControl } from 'react-native'
 import { useSelector } from 'react-redux';
 
 import { useTheme } from '../../hooks';
-import { AuthTokenState, Order } from 'EBayOrders/@types/ebay';
+import { AuthTokenState, Order } from '../../../@types/ebay';
+import { getAllFulfillmentOrders, fillOrderItemDetails } from '../../services/modules/ebay';
+
+import OrderListItem from '../../components/OrderListItem';
 
 const OrderList = () => {
     const { Layout } = useTheme();
@@ -15,12 +18,13 @@ const OrderList = () => {
     const handleRefresh = useCallback(async () => {
         setIsRefreshing(true);
         try{
-          /*const result = await getFulfillmentOrders(access_token)
-          const { orderPack, error } = result;
+          const result = await getAllFulfillmentOrders(access_token)
+          const { orders:orderpack, error } = result;
           if(error) throw error;
-          const orders = await fillOrderItemDetails(access_token, orderPack);*/
+          const orders = await fillOrderItemDetails(access_token, orderpack);
           setOrders(orders)
         }catch(err){
+          console.error(err);
         }finally {
           setIsRefreshing(false);      
         }
@@ -31,9 +35,9 @@ const OrderList = () => {
         ///fetchOrderReturns(access_token)
       }, []);
 
-    const renderOrderItem = ({key})=>{        
+    const renderOrderItem = ({key, item}:{key:any; item:Order})=>{        
         return(
-            <Text key={key}>OrderItem</Text>
+          <OrderListItem orderItem={item} key={key}/>
         )
         {/*<OrderListItem orderItem={item} key={key}/> */}
     }

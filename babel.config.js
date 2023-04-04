@@ -14,6 +14,15 @@ module.exports = {
       },
     ],
     'inline-dotenv',
-    'react-native-reanimated/plugin', // needs to be last
+    [
+      'react-native-reanimated/plugin', {
+          relativeSourceLocation: true,
+      },
+    ]
   ],
+  env: {
+    production: {
+      plugins: ['react-native-paper/babel'],
+    },
+  }
 };
