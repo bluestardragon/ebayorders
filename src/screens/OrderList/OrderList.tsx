@@ -37,7 +37,7 @@ const OrderList = () => {
 
     const renderOrderItem = ({key, item}:{key:any; item:Order})=>{        
         return(
-          <OrderListItem orderItem={item} key={key}/>
+          <OrderListItem orderItem={item} key={key} />
         )
         {/*<OrderListItem orderItem={item} key={key}/> */}
     }

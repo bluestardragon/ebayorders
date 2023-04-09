@@ -4,16 +4,17 @@ import { getAspects } from '../services/helpers';
 import { useTheme } from '../hooks';
 import Lightbox from 'react-native-lightbox-v2';
 import Carousel from 'react-native-new-snap-carousel';
+import { Card } from 'react-native-paper'
 
 type Props = {
     inventory: any  
 };
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
-const LineItem = ({ inventory }: Props) =>{
+const UnsoldLineItem = ({ inventory }: Props) =>{
     const  data = inventory
     const aspect = getAspects(data)
-
+    console.log('inventory', JSON.stringify(inventory.shippingOptions))    
     const renderCarousel = () => (
         <View style={{ paddingVertical:30 }}>
             <Carousel
@@ -32,9 +33,9 @@ const LineItem = ({ inventory }: Props) =>{
       )
 
     return (
-        <View>
+        <Card style={{ marginVertical:5 }}>
           {        
-            <View style={{ flexDirection:'row' }}>
+            <Card.Content style={{ flexDirection:'row' }}>
                 <Lightbox springConfig={{tension: 15, friction: 7}} swipeToDismiss={false} renderContent={renderCarousel}>
                   <Image source={{ uri:data.image.imageUrl }} style={{ width: 150, height:150, marginRight:10 }}></Image> 
                 </Lightbox>
@@ -56,10 +57,10 @@ const LineItem = ({ inventory }: Props) =>{
                         <Text>{ `${aspect['Location']}` }</Text>
                     </View>
                 </View>
-            </View>        
+            </Card.Content>
           }
-        </View>
+        </Card>
       )
 }
 
-export default LineItem
+export default UnsoldLineItem

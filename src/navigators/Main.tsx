@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Example, OrderList } from '../screens';
-
+import { UnsoldList, OrderList } from '../screens';
 const Tab = createBottomTabNavigator();
 
 // @refresh reset
@@ -17,16 +16,8 @@ const MainNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Cancelling Orders"
-        component={OrderList}
-        options={{
-          tabBarIconStyle: { display: 'none' },
-          tabBarLabelPosition: 'beside-icon',
-        }}
-      />
-      <Tab.Screen
-        name="Returning Orders"
-        component={OrderList}
+        name="Unsold Listings"
+        component={UnsoldList}
         options={{
           tabBarIconStyle: { display: 'none' },
           tabBarLabelPosition: 'beside-icon',
