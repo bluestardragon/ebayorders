@@ -22,3 +22,10 @@ interface OrderData {
     warning: { message: string }
 }
 */
+interface ListingItemType {
+    title: string, 
+    detail: string, 
+    image: string, 
+    images:string[], 
+    shippingOptions: any[]
+}

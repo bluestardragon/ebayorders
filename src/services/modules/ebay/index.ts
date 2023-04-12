@@ -3,7 +3,7 @@ import PARAMS from './consts'
 var base64 = require('base-64');
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
-import { OrderData, Order } from '../../../../@types/ebay'
+import { OrderData, Order, ListingItemType} from '../../../../@types/ebay'
 
 const getTokens = async (authorizeCode: string | (string | null)[] | null) => {
     try {
@@ -72,7 +72,7 @@ const fillOrderItemDetails = async (access_token: string | null, orders: Order[]
   return detailedOrders;
 };
 
-const getUnsoldItems = async(access_token: string|null, pagenumber:number|null = 1) =>{
+const getUnsoldItems = async(access_token: string|null, pagenumber:number|null = 1):Promise<ListingItemType[]> =>{
   const callName = 'GetMyeBaySelling';
   const siteID = 0; // USA
   const EntriesPerPage = 10;
@@ -132,6 +132,7 @@ const getUnsoldItems = async(access_token: string|null, pagenumber:number|null =
     return Promise.all(itemInfoPromise);
   }).catch((error) => {
       console.log('Error while making API call:', error.response);
+      throw error;
   });
 }
 
@@ -168,8 +169,28 @@ const getShippingServices = (access_token:string|null) =>{
   };
 
   axios(options).then((response) => {
-    console.log(response.data);
+    ///console.log(response.data);
   })
 }
 
-export { getTokens, getAllFulfillmentOrders, fillOrderItemDetails, getUnsoldItems, createFulfillmentOrder, getShippingServices }
+const getAllUnsoldItems = async (access_token:string|null) =>{
+  let unsoldItems:ListingItemType[] = [];
+  let pageNumber = 1;
+  while(1){
+    const items:ListingItemType[] = await getUnsoldItems(access_token, pageNumber);
+    if(items.length==0) break;
+    unsoldItems = unsoldItems.concat(items);
+    pageNumber++;
+  }
+  return unsoldItems;
+}
+
+export { 
+  getTokens, 
+  getAllFulfillmentOrders, 
+  fillOrderItemDetails, 
+  getUnsoldItems, 
+  createFulfillmentOrder, 
+  getShippingServices, 
+  getAllUnsoldItems 
+}

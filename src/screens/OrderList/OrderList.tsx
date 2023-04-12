@@ -39,7 +39,6 @@ const OrderList = () => {
         return(
           <OrderListItem orderItem={item} key={key} />
         )
-        {/*<OrderListItem orderItem={item} key={key}/> */}
     }
 
     return (
