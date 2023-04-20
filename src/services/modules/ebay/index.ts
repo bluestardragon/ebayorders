@@ -4,7 +4,6 @@ var base64 = require('base-64');
 const { XMLParser, XMLBuilder, XMLValidator} = require("fast-xml-parser");
 
 import { OrderData, Order, ListingItemType} from '../../../../@types/ebay'
-
 const getTokens = async (authorizeCode: string | (string | null)[] | null) => {
     try {
       const base64_encoded = base64.encode(`${PARAMS.CLIENT_ID}:${PARAMS.CLIENT_SECRET}`)
@@ -168,8 +167,7 @@ const getShippingServices = (access_token:string|null) =>{
     data: requestBody
   };
 
-  axios(options).then((response) => {
-    ///console.log(response.data);
+  axios(options).then((response) => {    
   })
 }
 
@@ -185,12 +183,20 @@ const getAllUnsoldItems = async (access_token:string|null) =>{
   return unsoldItems;
 }
 
+const getUser = async (access_token) => {
+  const url='https://apiz.ebay.com/commerce/identity/v1/user/';
+  const headers = { Authorization:`Bearer ${access_token}`}
+  const { data } = await axios.get(url, { headers })
+  console.log('getUserApiResponse', JSON.stringify(data));
+}
+
 export { 
   getTokens, 
   getAllFulfillmentOrders, 
   fillOrderItemDetails, 
   getUnsoldItems, 
   createFulfillmentOrder, 
-  getShippingServices, 
-  getAllUnsoldItems 
+  getShippingServices,
+  getAllUnsoldItems,
+  getUser
 }

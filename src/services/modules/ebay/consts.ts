@@ -11,7 +11,8 @@ const sandboxParams = {
             'https://api.ebay.com/oauth/api_scope',
             'https://api.ebay.com/oauth/api_scope/sell.finances',
             'https://api.ebay.com/oauth/api_scope/sell.marketing.readonly',
-            'https://api.ebay.com/oauth/api_scope/sell.account.readonly'].join(' '),
+            'https://api.ebay.com/oauth/api_scope/sell.account.readonly',
+            'https://api.ebay.com/oauth/api_scope/commerce.identity.readonly'].join(' '),
     getTokenEndpoint: 'https://api.sandbox.ebay.com/identity/v1/oauth2/token'
 }
 
@@ -26,7 +27,8 @@ const prodParams = {
             'https://api.ebay.com/oauth/api_scope',
             'https://api.ebay.com/oauth/api_scope/sell.finances',
             'https://api.ebay.com/oauth/api_scope/sell.marketing.readonly',
-            'https://api.ebay.com/oauth/api_scope/sell.account.readonly'].join(' '),
+            'https://api.ebay.com/oauth/api_scope/sell.account.readonly',
+            'https://api.ebay.com/oauth/api_scope/commerce.identity.readonly'].join(' '),
     getTokenEndpoint: 'https://api.ebay.com/identity/v1/oauth2/token'
 }
 

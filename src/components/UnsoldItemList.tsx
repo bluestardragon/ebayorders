@@ -16,14 +16,12 @@ const UnsoldItemList = () =>{
     const handleRefresh = useCallback(async () => {
         try{
             setIsRefreshing(true);
-            console.log('TTTT1')
           const result = await getAllUnsoldItems(access_token)
           setUnsoldItems(result)
         }catch(err){
           console.error(err);
         }finally {
             setIsRefreshing(false);
-            console.log('TTTT2')
         }        
     }, []);
     

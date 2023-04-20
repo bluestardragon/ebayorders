@@ -68,9 +68,7 @@ const UnsoldList = ({ navigation }) => {
 
   const renderUnsoldItem = ({key, item}:{key:any; item:Order})=>{        
       return(
-        <Swipeable renderRightActions={ ()=>renderLeftActions(item) } key={key} overshootRight={false}>
-          <LineItem inventory={item} />
-        </Swipeable>
+        <LineItem inventory={item} key={key}/>
       )
   }
 

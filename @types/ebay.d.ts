@@ -5,6 +5,7 @@ export interface AuthTokenState {
 
 export interface Order {
     orderId: string,
+    legacyOrderId: string,
     lineItems:any[]    
 }
 
@@ -28,4 +29,14 @@ interface ListingItemType {
     image: string, 
     images:string[], 
     shippingOptions: any[]
+}
+
+export interface ItemType {
+    title: string, 
+    detail: string, 
+    image: string, 
+    images:string[],
+    itemLocation:string,
+    type:'OrderedItem'|'UnsoldListItem',
+    itemID: string|null
 }

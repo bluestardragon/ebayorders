@@ -1,25 +1,24 @@
 import React from 'react'
-import { View, Text, Image, Dimensions } from 'react-native';
-import { getAspects } from '../services/helpers';
-import { useTheme } from '../hooks';
-import Lightbox from 'react-native-lightbox-v2';
-import Carousel from 'react-native-new-snap-carousel';
+import { View, Text, Image, Dimensions } from 'react-native'
 import { Card } from 'react-native-paper'
+import Carousel from 'react-native-new-snap-carousel';
+import Lightbox from 'react-native-lightbox-v2';
 
-type Props = {
-    inventory: any  
-};
+import { getAspects } from '../services/helpers';
+
+type OrderItemInMergeProps = {
+    item: any
+}
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
-const UnsoldLineItem = ({ inventory }: Props) =>{
-    const  data = inventory
-    const aspect = getAspects(data)
+const OrderItemInMerge = ({ item }:OrderItemInMergeProps) =>{
+    
     const renderCarousel = () => (
         <View style={{ paddingVertical:30 }}>
             <Carousel
-                data={ data.images }
+                data={ item.images }
                 containerCustomStyle={{ marginTop: 50 }}
-                renderItem={({item, index})=>(
+                renderItem={ ( { item }: { item:{imageUrl:string }} )=>(
                     <View style={{ backgroundColor:'floralwhite', borderRadius: 5, height: 250}}>
                         <Image style={{ flex:1 }} source={{ uri: item.imageUrl }} resizeMode='contain'/>
                     </View>
@@ -30,18 +29,18 @@ const UnsoldLineItem = ({ inventory }: Props) =>{
             />
         </View>
       )
-
-    return (
-        <Card style={{ marginVertical:5 }}>
-          {        
-            <Card.Content style={{ flexDirection:'row' }}>
+      
+      const aspect = getAspects(item)
+    return(
+        <Card style={{ backgroundColor:'lightblue', marginBottom:10, padding:10 }}>        
+            <View style={{ flexDirection:'row' }}>
                 <Lightbox springConfig={{tension: 15, friction: 7}} swipeToDismiss={false} renderContent={renderCarousel}>
-                  <Image source={{ uri:data.image.imageUrl }} style={{ width: 150, height:150, marginRight:10 }}></Image> 
+                  <Image source={{ uri:item.image.imageUrl }} style={{ width: 150, height:150, marginRight:10 }}></Image> 
                 </Lightbox>
                 <View style={{ flex:1 }}>
                     <View style={{ flexDirection:'row' }}>
                         <Text style={{ color:'tan'}}>Title: </Text>
-                        <Text style={{ maxWidth:'90%' }}>{ inventory.title }</Text>
+                        <Text style={{ maxWidth:'90%' }}>{ item.title }</Text>
                     </View>
                     <View style={{ flexDirection:'row' }}>
                         <Text style={{ color:'tan'}}>Tag Number: </Text>
@@ -56,10 +55,9 @@ const UnsoldLineItem = ({ inventory }: Props) =>{
                         <Text>{ `${aspect['Location']}` }</Text>
                     </View>
                 </View>
-            </Card.Content>
-          }
+            </View>        
         </Card>
-      )
+    )
 }
 
-export default UnsoldLineItem
+export default OrderItemInMerge
