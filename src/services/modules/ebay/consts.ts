@@ -1,9 +1,9 @@
 const env:string = 'Prod'
 
 const sandboxParams = {
-    CLIENT_ID:'SpiroSil-Volodimi-SBX-8cd763674-d7ab0e44',
-    CLIENT_SECRET:'SBX-cd76367411c4-7e8b-4150-a92c-33a8',
-    REDIRECT_URI:'Spiro_Silyanov-SpiroSil-Volodi-ynnmwl', ///RU name in ebay    
+    CLIENT_ID:'',
+    CLIENT_SECRET:'',
+    REDIRECT_URI:'', ///RU name in ebay    
     authorizeUrl:'https://auth.sandbox.ebay.com/oauth2/authorize',
     ///scope:'https://api.ebay.com/oauth/api_scope',  ///'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly';
     scope:['https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly',
@@ -17,9 +17,9 @@ const sandboxParams = {
 }
 
 const prodParams = {
-    CLIENT_ID:'SpiroSil-Volodimi-PRD-3cd6d2723-3835bc9d',
-    CLIENT_SECRET:'PRD-cd6d27237275-529e-42dc-abe2-186c',
-    REDIRECT_URI:'Spiro_Silyanov-SpiroSil-Volodi-cltvgchh', ///RU name in ebay    
+    CLIENT_ID:'',
+    CLIENT_SECRET:'',
+    REDIRECT_URI:'', ///RU name in ebay    
     authorizeUrl:'https://auth.ebay.com/oauth2/authorize',
     ////scope:'https://api.ebay.com/oauth/api_scope',  ///'https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly';
     scope:['https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly',
